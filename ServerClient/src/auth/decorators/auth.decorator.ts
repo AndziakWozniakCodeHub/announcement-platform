@@ -1,6 +1,6 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { Request } from 'express';
-import { RequestPayload } from 'src/typeorm/customer.entity';
+import { RequestPayload } from 'src/typeorm/user.entity';
 
 export const Auth = createParamDecorator(
   (

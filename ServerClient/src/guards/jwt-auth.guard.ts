@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
-import { RoleNames } from 'src/typeorm/customer.entity';
+import { RoleNames } from 'src/typeorm/user.entity';
 import { ROLES_KEY } from 'src/users/decorators/roles.decorator';
 import { AuthService } from 'src/auth/services/auth.service';
 

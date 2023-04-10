@@ -10,19 +10,19 @@ import {
   UseInterceptors,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
-import { CreateCustomerDto } from 'src/users/dto/customers.dto';
-import { CustomersService } from 'src/users/services/customers.service';
+import { CreateUserDto } from 'src/users/dto/users.dto';
+import { UsersService } from 'src/users/services/users.service';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ApiAuth } from '../../auth/decorators/api-auth.decorator';
 import { PerformanceInterceptor } from '../../interceptors/performance.interceptor';
-import { Customer } from 'src/typeorm/customer.entity';
+import { User } from 'src/typeorm/user.entity';
 import { BadRequestException } from '@nestjs/common/exceptions';
-import { ExceptionResponse } from 'src/typeorm/customer.entity';
+import { ExceptionResponse } from 'src/typeorm/user.entity';
 
 @ApiTags('Customers')
 @Controller('Customers')
-export class CustomersController {
-  constructor(private readonly customersService: CustomersService) {}
+export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
 
   @ApiAuth()
   @UseInterceptors(PerformanceInterceptor, ClassSerializerInterceptor)
@@ -30,27 +30,27 @@ export class CustomersController {
   @ApiResponse({
     status: 200,
     description: 'This endpint returns all of the customers.',
-    type: Customer,
+    type: User,
   })
   getCustomers() {
-    return this.customersService.getUsers();
+    return this.usersService.getUsers();
   }
 
   @Get('id/:id')
   @ApiResponse({
     status: 200,
     description: 'This endpint return customer by provided ID.',
-    type: Customer,
+    type: User,
   })
   findUsersById(@Param('id', ParseIntPipe) id: number) {
-    return this.customersService.findUsersById(id);
+    return this.usersService.findUsersById(id);
   }
 
   @Post('create')
   @ApiResponse({
     status: 200,
     description: 'Success response. Returns body of the created customer.',
-    type: Customer,
+    type: User,
   })
   @ApiResponse({
     status: 400,
@@ -59,12 +59,12 @@ export class CustomersController {
   })
   @UsePipes(ValidationPipe)
   async createUsers(
-    @Body() createUserDto: CreateCustomerDto,
-  ): Promise<Customer> {
-    const allCustomers = await this.customersService.getUsers();
+    @Body() createUserDto: CreateUserDto,
+  ): Promise<User> {
+    const allCustomers = await this.usersService.getUsers();
 
     const existingCustomerByEmail = allCustomers.find(
-      (customer) => customer.email === createUserDto.email,
+      (user) => user.email === createUserDto.email,
     );
 
     if (existingCustomerByEmail) {
@@ -73,6 +73,6 @@ export class CustomersController {
       );
     }
 
-    return this.customersService.createUser(createUserDto);
+    return this.usersService.createUser(createUserDto);
   }
 }

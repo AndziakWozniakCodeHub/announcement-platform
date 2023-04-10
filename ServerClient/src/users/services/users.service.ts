@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Customer } from 'src/typeorm/customer.entity';
+import { User } from 'src/typeorm/user.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class CustomersService {
+export class UsersService {
   constructor(
-    @InjectRepository(Customer)
-    private readonly customerRepository: Repository<Customer>,
+    @InjectRepository(User)
+    private readonly customerRepository: Repository<User>,
   ) {}
 
-  createUser(createCustomerDto: Partial<Customer>): Promise<Customer> {
-    const newUser = this.customerRepository.create(createCustomerDto);
+  createUser(createUserDto: Partial<User>): Promise<User> {
+    const newUser = this.customerRepository.create(createUserDto);
     return this.customerRepository.save(newUser);
   }
 
@@ -19,7 +19,7 @@ export class CustomersService {
     return this.customerRepository.findOneBy({ id });
   }
 
-  async findBy(query: Partial<Customer>): Promise<Customer[]> {
+  async findBy(query: Partial<User>): Promise<User[]> {
     return this.customerRepository.find({ where: query });
   }
 

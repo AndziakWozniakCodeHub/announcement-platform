@@ -6,7 +6,6 @@ import {
   ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Contract } from './contract.entity';
 
 export enum RoleNames {
   ADMIN = 'admin',
@@ -25,12 +24,12 @@ export class Role {
   @Column()
   name: RoleNames;
 
-  @ManyToMany(() => Customer)
-  customers: Customer[];
+  @ManyToMany(() => User)
+  customers: User[];
 }
 
 @Entity()
-export class Customer {
+export class User {
   @PrimaryGeneratedColumn({
     type: 'bigint',
     name: 'user_id',
@@ -64,11 +63,6 @@ export class Customer {
   @JoinTable({ name: 'customer_roles' })
   roles: Role[];
 
-  @ManyToMany(() => Contract, (contract) => contract.contract_id, {
-    eager: true,
-  })
-  @JoinTable({ name: 'customer_contracts' })
-  contracts: Contract[];
 }
 
 export class TokenPayload {
@@ -76,7 +70,7 @@ export class TokenPayload {
 }
 
 export class RequestPayload {
-  customer: Customer;
+  customer: User;
 }
 
 export class ExceptionResponse {

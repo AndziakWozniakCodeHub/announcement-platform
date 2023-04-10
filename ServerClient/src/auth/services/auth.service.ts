@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Customer } from 'src/typeorm';
-import { RequestPayload, TokenPayload } from 'src/typeorm/customer.entity';
-import { CustomersService } from '../../users/services/customers.service';
+import { RequestPayload, TokenPayload } from 'src/typeorm/user.entity';
+import { UsersService } from '../../users/services/users.service';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
   constructor(
     private jwtService: JwtService,
-    private usersService: CustomersService,
+    private usersService: UsersService,
   ) {}
 
   async encodeUserToken(customer: Customer): Promise<string> {

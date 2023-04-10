@@ -11,9 +11,9 @@ import {
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { PerformanceInterceptor } from '../../interceptors/performance.interceptor';
 import { AuthService } from '../services/auth.service';
-import { CustomersService } from '../../users/services/customers.service';
+import { UsersService } from '../../users/services/users.service';
 import { Auth } from '../decorators/auth.decorator';
-import { Customer } from 'src/typeorm/customer.entity';
+import { User } from 'src/typeorm/user.entity';
 import { ApiAuth } from '../decorators/api-auth.decorator';
 import {
   AuthLoginDto,
@@ -26,7 +26,7 @@ import {
 export class AuthController {
   constructor(
     private authService: AuthService,
-    private customersService: CustomersService,
+    private customersService: UsersService,
   ) {}
 
   @Get()
@@ -35,13 +35,13 @@ export class AuthController {
   @ApiResponse({
     status: 200,
     description: 'User is logged in.',
-    type: Customer,
+    type: User,
   })
   @ApiResponse({
     status: 401,
     description: 'JWT token required.',
   })
-  me(@Auth() customer: Customer) {
+  me(@Auth() customer: User) {
     return customer;
   }
 
@@ -49,7 +49,7 @@ export class AuthController {
   @ApiResponse({
     status: 200,
     description: 'User has been registred.',
-    type: Customer,
+    type: User,
   })
   @ApiResponse({
     status: 400,

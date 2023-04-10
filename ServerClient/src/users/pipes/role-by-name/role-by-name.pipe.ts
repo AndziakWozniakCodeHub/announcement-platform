@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, PipeTransform } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Role, RoleNames } from '../../../typeorm/customer.entity';
+import { Role, RoleNames } from '../../../typeorm/user.entity';
 
 @Injectable()
 export class RoleByNamePipe implements PipeTransform {

@@ -1,4 +1,4 @@
-import { RoleNames } from 'src/typeorm/customer.entity';
+import { RoleNames } from 'src/typeorm/user.entity';
 import { applyDecorators, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { ApiBearerAuth } from '@nestjs/swagger';

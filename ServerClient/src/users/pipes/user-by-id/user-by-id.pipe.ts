@@ -5,11 +5,11 @@ import {
   NotFoundException,
   BadRequestException,
 } from '@nestjs/common';
-import { CustomersService } from '../../services/customers.service';
+import { UsersService } from '../../services/users.service';
 
 @Injectable()
-export class CustomerByIdPipe implements PipeTransform {
-  constructor(private usersService: CustomersService) {}
+export class UserByIdPipe implements PipeTransform {
+  constructor(private usersService: UsersService) {}
 
   async transform(value: string, metadata: ArgumentMetadata) {
     const id = parseInt(value, 10);

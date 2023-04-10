@@ -5,7 +5,7 @@ import {
   ValidationArguments,
   ValidationOptions,
 } from 'class-validator';
-import { Customer } from 'src/typeorm/customer.entity';
+import { User } from 'src/typeorm/user.entity';
 
 export class AuthRegisterDto {
   @ApiProperty({ example: 'Kacper' })
@@ -34,7 +34,7 @@ export class AuthLoginResponse {
   @ApiProperty()
   token: string;
   @ApiProperty()
-  user: Customer;
+  user: User;
 }
 
 export function IsPassword(validationOptions?: ValidationOptions) {

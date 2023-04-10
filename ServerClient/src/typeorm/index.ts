@@ -1,8 +1,6 @@
-import { Contract } from './contract.entity';
-import { Role, Customer } from './customer.entity';
-import { Offer } from './offer.entity';
+import { Role, User } from './user.entity';
 
-const entities = [Customer, Role, Offer, Contract];
+const entities = [User, Role];
 
-export { Customer };
+export { User as Customer };
 export default entities;
